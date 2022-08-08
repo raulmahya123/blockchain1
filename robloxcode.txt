@@ -1,0 +1,258 @@
+local drink = script.Parent.Parent.CavalrySword
+local spot = script.Parent.Parent.Holder2
+local db = false
+
+function onClick()
+	if db == false then
+		db = true
+		local d = drink:clone()
+		d.Handle.Position = spot.Position
+		d.Handle.Anchored = false
+		d.Parent = game.Workspace
+		wait(5)
+		db = false
+	end
+end
+
+script.Parent.ClickDetector.MouseClick:connect(onClick)
+
+--[[
+
+  _____       _        _       ___  _    _           ___         _             
+ |_   _|__ __| |_ _  _( )___  / _ \| |__| |__ _  _  / __|_  _ __| |_ ___ _ __  
+   | |/ -_) _| ' \ || |/(_-< | (_) | '_ \ '_ \ || | \__ \ || (_-<  _/ -_) '  \ 
+   |_|\___\__|_||_\_, | /__/  \___/|_.__/_.__/\_, | |___/\_, /__/\__\___|_|_|_|
+                  |__/                        |__/       |__/                  
+                  
+                         ⚠️ SCROLL DOWN FOR CONFIGURATION ⚠️
+                           
+This is a open-sourced obby system by Techyfied. Feel free to use it. I would really appreciate if you
+add this to your description,
+"This game uses Techy's Obby System."
+
+This script connects to all the scripts of this game. It's mainly for configuration. You can see
+a description of each options on the same line.
+
+Configure below.
+
+TO-DO: Put "Move To StarterGui" in StarterGui and ungroup. Put "Move To Workspace" in Workspace
+       and ungroup. Keep the model in Workspace. Delete  "DeleteMe" if you want. And configure below.
+       
+FAQ: https://devforum.roblox.com/t/785271/52
+INFO: https://devforum.roblox.com/t/785271   
+
+⚠️ TO RESET DATA, SIMPLY CHANGE datastoreName HERE!  Plus this game HAS AUTOSAVE. set 
+                    dataAutosaves to true below to turn it on.⚠️
+     
+]]
+
+local Configuration = {
+	
+	-- Obby Settings --
+	skipStageProductID = 1091229735, -- Replace the number with your skip stage id. If you don't want a skip stage, set the number to 0.
+	datastoreName = "MyDatastore_1", -- Put the datastore name. It can be anything. Change it to reset data.
+	
+	dataAutosaves = false, -- If true, player's stage data will autosave and they will spawn on the last stage when they leave and rejoin.
+	deathEffectDisabled = false, -- If true, it will disable health bar, and red screen when a character is damaged.
+	mobileShiftlockEnabled = false, -- If true, mobile players will have a togglable shiftlock on their screen.
+	-------------------
+	
+	-- GUI Customization --
+	guiCustomized = false, -- If you're editing the variables below, make sure to make it true.
+	
+	buttonBackgroundColor = Color3.fromRGB(255, 255, 255), -- Background color of the buttons.
+	buttonTextColor = Color3.fromRGB(0, 0, 0), -- Text color of the texts on buttons.
+	buttonTextFont = Enum.Font.SourceSans, -- Font of the texts on the buttons.
+	buttonCornerRadius = UDim.new(0, 8), -- Corner radius of every buttons. 8 is the perfect and set by default.
+	
+	stageNumberColor = Color3.fromRGB(255, 255, 255), -- Color of the number on the GUI that shows what stage you're currently on.
+	stageNumberFont = Enum.Font.FredokaOne,
+	
+	spectateFramePrimaryColor = Color3.fromRGB(255, 255, 255),
+	spectateFrameSecondaryColor = Color3.fromRGB(255, 255, 255),
+	spectateFrameTextColor = Color3.fromRGB(0, 0, 0)
+	-----------------------
+	
+}
+
+return Configuration
+seat = script.Parent
+function added(child)
+ if (child.className=="Weld") then
+  human = child.part1.Parent:FindFirstChild("Humanoid")
+  if human ~= nil then
+   anim = human:LoadAnimation(seat.sitanim)
+   anim:Play()
+  end
+  end
+end
+
+function removed(child2)
+ if anim ~= nil then
+  anim:Stop()
+  anim:Remove()
+ end
+end
+
+seat.ChildAdded:connect(added)
+seat.ChildRemoved:connect(removed)
+
+end
+
+seat.ChildAdded:connect(added)
+seat.ChildRemoved:connect(removed)
+seat = script.Parent
+function added(child)
+ if (child.className=="Weld") then
+  human = child.part1.Parent:FindFirstChild("Humanoid")
+  if human ~= nil then
+   anim = human:LoadAnimation(seat.sitanim)
+   anim:Play()
+  end
+  end
+end
+
+function removed(child2)
+ if anim ~= nil then
+  anim:Stop()
+  anim:Remove()
+ end
+end
+
+seat.ChildAdded:connect(added)
+seat.ChildRemoved:connect(removed)
+local lighting = game:GetService("Lighting")
+local ts = game:GetService("TweenService")
+local text = script.Parent.TextLabel
+local wanttext = true
+
+local transition = 3
+local ti = TweenInfo.new(transition,Enum.EasingStyle.Quad,Enum.EasingDirection.InOut)
+local tit = TweenInfo.new(1,Enum.EasingStyle.Quad,Enum.EasingDirection.InOut)
+local day= 1000
+local night = 1000
+
+while true do
+	local t1 = ts:Create(lighting,ti,{ClockTime = 1})
+	if wanttext == true then
+		ts:Create(text,tit,{TextTransparency = 0}):Play()
+		text.Text = string.upper("Malam")
+	end
+	t1:Play()
+	t1.Completed:Wait()
+	if wanttext == true then
+		ts:Create(text,tit,{TextTransparency = 1}):Play()
+	end
+	
+	wait(day)
+	
+	local t1 = ts:Create(lighting,ti,{ClockTime = 14})
+	if wanttext == true then
+		ts:Create(text,tit,{TextTransparency = 0}):Play()
+		text.Text = string.upper("Pagi")
+	end
+	t1:Play()
+	t1.Completed:wait()
+	if wanttext ==  true then
+		ts:Create(text,tit,{TextTransparency = 1}):Play()
+	end
+	
+	wait(day)
+	
+	local t1
+end
+local StarterGui = game:GetService("StarterGui")
+
+local createDialogueEvent = game.ReplicatedStorage.Remotes.createDialogueEvent
+local hideDialogueEvent = game.ReplicatedStorage.Remotes.hideDialogueEvent
+local setDialogueImageEvent = game.ReplicatedStorage.Remotes.setDialogueImageEvent
+
+local richText = require(game.ReplicatedStorage.Modules.RichText)
+
+local player = game.Players.LocalPlayer
+local dialogueFrame = player.PlayerGui.MainGui.DialogueFrame
+
+local function swooshSound()
+	local sound = Instance.new("Sound",game.ReplicatedStorage)
+	sound.PlaybackSpeed = 1
+	sound.Volume = 1
+	sound.PlayOnRemove = true
+	sound.SoundId = "rbxassetid://4845387138"
+	sound:Destroy()
+end
+
+hideDialogueEvent.OnClientEvent:Connect(function()
+	
+	StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+	
+	swooshSound()
+	dialogueFrame:TweenPosition(UDim2.new(0.5,0,2,0),.1)
+end)
+
+createDialogueEvent.OnClientEvent:Connect(function(english,spanish)
+	if dialogueFrame.Position ~= UDim2.new(0.5,0,0.85,0) then
+		
+		StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+		
+		dialogueFrame:TweenPosition(UDim2.new(0.5,0,0.85,0),.1)
+		
+	end
+	
+	local ln = game:GetService("LocalizationService").RobloxLocaleId
+	local content = english
+	if ln == "en-us" then
+		content = english
+	elseif ln == "es-es" then
+		if spanish then
+			content = spanish
+		end
+	end
+	
+	local textObject = richText:New(dialogueFrame.textFrame, content)
+	textObject:Animate(true)
+end)
+
+-- Viewport Script Starts Here
+
+local function cleanVPF()
+
+	if dialogueFrame.ViewportFrame:FindFirstChildOfClass("Model") then
+		dialogueFrame.ViewportFrame:FindFirstChildOfClass("Model"):Destroy()
+	end
+
+	if dialogueFrame.ViewportFrame:FindFirstChildOfClass("Camera") then
+		dialogueFrame.ViewportFrame:FindFirstChildOfClass("Camera"):Destroy()
+	end
+
+end
+
+setDialogueImageEvent.OnClientEvent:Connect(function(model,color)
+
+	dialogueFrame.nameLabel.TextColor3 = color
+	dialogueFrame.nameLabel.Text = model.Name
+
+	local vpCharacter = model
+	if vpCharacter then
+		
+		cleanVPF()
+		
+		local obj = vpCharacter:Clone()
+		obj.Parent = dialogueFrame.ViewportFrame
+		
+		obj.Humanoid.DisplayDistanceType = "None"
+		
+		local cam = Instance.new("Camera")
+		cam.Parent = dialogueFrame.ViewportFrame
+		
+		cam.CFrame = CFrame.new(obj.Head.Position + (obj.PrimaryPart.CFrame.lookVector*2), obj.Head.Position)
+		
+		dialogueFrame.ViewportFrame.CurrentCamera = cam
+		
+	else
+		warn(model.Name .. " is not in ReplicatedStorage")
+	end
+	
+end)
+
+
+
